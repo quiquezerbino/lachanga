@@ -8,6 +8,7 @@ import { buttonVariants } from "@/components/ui/button-variants";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { useAuth } from "@/contexts/auth-context";
 import { Menu, LogOut, LayoutDashboard } from "lucide-react";
+import Image from "next/image";
 
 const navLinks = [
   { href: "/explorar", label: "Buscar tareas" },
@@ -29,23 +30,15 @@ export function Header() {
     <header className="sticky top-0 z-50 border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
         {/* Logo */}
-        <Link href="/" className="flex items-center gap-2">
-          <svg
-            viewBox="0 0 40 40"
-            className="h-8 w-8 text-primary"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <circle cx="20" cy="20" r="18" stroke="currentColor" strokeWidth="3" />
-            <path
-              d="M12 20l5 5 11-11"
-              stroke="currentColor"
-              strokeWidth="3"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
-          <span className="text-xl font-bold text-foreground">La Changa</span>
+        <Link href="/" className="flex items-center">
+          <Image
+            src="/logo-lachanga.png"
+            alt="La Changa"
+            width={180}
+            height={100}
+            className="h-10 w-auto"
+            priority
+          />
         </Link>
 
         {/* Desktop nav */}

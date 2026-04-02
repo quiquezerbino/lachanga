@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 
 const footerSections = [
   {
@@ -32,23 +33,14 @@ export function Footer() {
         <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
           {/* Brand */}
           <div>
-            <Link href="/" className="flex items-center gap-2">
-              <svg
-                viewBox="0 0 40 40"
-                className="h-7 w-7 text-primary"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <circle cx="20" cy="20" r="18" stroke="currentColor" strokeWidth="3" />
-                <path
-                  d="M12 20l5 5 11-11"
-                  stroke="currentColor"
-                  strokeWidth="3"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-              <span className="text-lg font-bold">La Changa</span>
+            <Link href="/" className="flex items-center">
+              <Image
+                src="/logo-lachanga.png"
+                alt="La Changa"
+                width={150}
+                height={84}
+                className="h-8 w-auto"
+              />
             </Link>
             <p className="mt-3 text-sm text-muted-foreground">
               La forma más fácil de conseguir ayuda en Uruguay.
