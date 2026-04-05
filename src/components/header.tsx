@@ -9,6 +9,7 @@ import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { useAuth } from "@/contexts/auth-context";
 import { Menu, LogOut, LayoutDashboard } from "lucide-react";
 import Image from "next/image";
+import { NotificationsBell } from "@/components/notifications-bell";
 
 const navLinks = [
   { href: "/explorar", label: "Buscar tareas" },
@@ -63,6 +64,7 @@ export function Header() {
                 <LayoutDashboard className="h-4 w-4" />
                 Dashboard
               </Link>
+              <NotificationsBell />
               <span className="text-sm font-medium text-foreground">
                 {profile?.full_name?.split(" ")[0] || "Mi cuenta"}
               </span>
