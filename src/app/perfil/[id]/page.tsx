@@ -7,6 +7,7 @@ import { es } from "date-fns/locale";
 import { MapPin, Star, Calendar, ShieldCheck, Pencil } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { buttonVariants } from "@/components/ui/button-variants";
+import { UserAvatar } from "@/components/user-avatar";
 import { createClient } from "@/lib/supabase/client";
 import { useAuth } from "@/contexts/auth-context";
 import type { Tables } from "@/lib/supabase/types";
@@ -86,9 +87,11 @@ export default function PerfilPage({ params }: { params: Promise<{ id: string }>
       <div className="rounded-xl border bg-card p-6">
         <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
           <div className="flex items-center gap-4">
-            <span className="flex h-16 w-16 items-center justify-center rounded-full bg-primary text-xl font-bold text-primary-foreground">
-              {profile.full_name?.charAt(0)?.toUpperCase() || "?"}
-            </span>
+            <UserAvatar
+              src={profile.avatar_url}
+              name={profile.full_name}
+              className="h-16 w-16 text-xl"
+            />
             <div>
               <div className="flex items-center gap-2">
                 <h1 className="text-xl font-bold">{profile.full_name}</h1>
@@ -153,9 +156,12 @@ export default function PerfilPage({ params }: { params: Promise<{ id: string }>
               <div key={review.id} className="rounded-lg border bg-card p-4">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
-                    <span className="flex h-8 w-8 items-center justify-center rounded-full bg-muted text-xs font-bold text-muted-foreground">
-                      {review.reviewer?.full_name?.charAt(0)?.toUpperCase() || "?"}
-                    </span>
+                    <UserAvatar
+                      src={review.reviewer?.avatar_url}
+                      name={review.reviewer?.full_name}
+                      size="sm"
+                      className="h-8 w-8"
+                    />
                     <span className="text-sm font-medium">{review.reviewer?.full_name || "Usuario"}</span>
                   </div>
                   <div className="flex items-center gap-0.5">

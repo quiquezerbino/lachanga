@@ -10,6 +10,7 @@ import { useAuth } from "@/contexts/auth-context";
 import { Menu, LogOut, LayoutDashboard } from "lucide-react";
 import Image from "next/image";
 import { NotificationsBell } from "@/components/notifications-bell";
+import { UserAvatar } from "@/components/user-avatar";
 
 const navLinks = [
   { href: "/explorar", label: "Buscar tareas" },
@@ -65,9 +66,12 @@ export function Header() {
                 Dashboard
               </Link>
               <NotificationsBell />
-              <span className="text-sm font-medium text-foreground">
-                {profile?.full_name?.split(" ")[0] || "Mi cuenta"}
-              </span>
+              <Link href={`/perfil/${user.id}`} className="flex items-center gap-2 transition-opacity hover:opacity-80">
+                <UserAvatar src={profile?.avatar_url} name={profile?.full_name} size="sm" />
+                <span className="text-sm font-medium text-foreground">
+                  {profile?.full_name?.split(" ")[0] || "Mi cuenta"}
+                </span>
+              </Link>
               <Link href="/publicar" className={buttonVariants()}>
                 Publicar tarea
               </Link>

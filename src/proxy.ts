@@ -1,7 +1,15 @@
-import { type NextRequest } from "next/server";
+import { type NextRequest, NextResponse } from "next/server";
 import { updateSession } from "@/lib/supabase/middleware";
 
 export async function proxy(request: NextRequest) {
+  // www → apex redirect
+  const host = request.headers.get("host") || "";
+  if (host.startsWith("www.")) {
+    const url = request.nextUrl.clone();
+    url.host = host.replace("www.", "");
+    return NextResponse.redirect(url, 301);
+  }
+
   return await updateSession(request);
 }
 
