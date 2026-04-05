@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { buttonVariants } from "@/components/ui/button-variants";
-import { Card, CardContent } from "@/components/ui/card";
 import { JsonLd } from "@/components/json-ld";
 import {
   ArrowRight,
@@ -136,35 +135,45 @@ export default function HomePage() {
       <JsonLd data={jsonLdData} />
 
       {/* Hero */}
-      <section className="bg-gradient-to-b from-background to-muted/30 py-20 sm:py-28">
-        <div className="mx-auto max-w-4xl px-4 text-center sm:px-6 lg:px-8">
-          <h1 className="text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl">
-            Resolvé lo que necesites
-          </h1>
-          <p className="mx-auto mt-6 max-w-2xl text-lg text-muted-foreground">
-            Publicá tu tarea, elegí al mejor, y listo. La forma más fácil de
-            conseguir ayuda en Uruguay.
-          </p>
-          <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
-            <Link href="/publicar" className={buttonVariants({ size: "lg" })}>
-              Publicar tarea gratis <ArrowRight className="ml-2 h-4 w-4" />
-            </Link>
-            <Link
-              href="/registro?role=tasker"
-              className={buttonVariants({ variant: "outline", size: "lg" })}
+      <section className="relative overflow-hidden py-16 sm:py-24 lg:py-32">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="mx-auto max-w-3xl text-center">
+            <h1
+              className="text-4xl font-extrabold tracking-tight text-foreground sm:text-5xl lg:text-6xl"
+              style={{ letterSpacing: "-0.04em" }}
             >
-              Ganá plata haciendo changas
-            </Link>
+              Resolvé lo que necesites
+            </h1>
+            <p className="mx-auto mt-4 max-w-xl text-lg leading-relaxed text-muted-foreground sm:mt-6 sm:text-xl">
+              Publicá tu tarea, elegí al mejor, y listo. La forma más fácil de
+              conseguir ayuda en Uruguay.
+            </p>
+            <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row sm:gap-4">
+              <Link
+                href="/publicar"
+                className={buttonVariants({ size: "lg", className: "gap-2 px-6 text-base font-semibold shadow-sm" })}
+              >
+                Publicar tarea gratis <ArrowRight className="h-4 w-4" />
+              </Link>
+              <Link
+                href="/registro?role=tasker"
+                className={buttonVariants({ variant: "outline", size: "lg", className: "px-6 text-base font-semibold" })}
+              >
+                Ganá plata haciendo changas
+              </Link>
+            </div>
           </div>
 
-          {/* Value props — real, not fake stats */}
-          <div className="mt-16 grid gap-6 sm:grid-cols-3">
+          {/* Value props */}
+          <div className="mx-auto mt-12 grid max-w-3xl gap-6 sm:mt-16 sm:grid-cols-3">
             {valueProps.map((prop) => (
               <div
                 key={prop.title}
-                className="flex flex-col items-center gap-3 rounded-xl border bg-card p-6 shadow-sm"
+                className="flex flex-col items-center gap-3 rounded-xl border border-border bg-card p-6 text-center shadow-sm"
               >
-                <prop.icon className="h-8 w-8 text-primary" />
+                <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-primary/10">
+                  <prop.icon className="h-6 w-6 text-primary" />
+                </div>
                 <h3 className="font-semibold">{prop.title}</h3>
                 <p className="text-sm text-muted-foreground">{prop.description}</p>
               </div>
@@ -174,24 +183,41 @@ export default function HomePage() {
       </section>
 
       {/* Cómo funciona */}
-      <section className="py-20">
-        <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
-          <h2 className="text-center text-3xl font-bold">¿Cómo funciona?</h2>
-          <div className="mt-12 grid gap-8 sm:grid-cols-3">
-            {steps.map((step) => (
-              <div key={step.number} className="text-center">
-                <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-primary text-lg font-bold text-primary-foreground">
-                  {step.number}
+      <section className="bg-card py-16 sm:py-24 lg:py-32">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <h2
+            className="text-center text-2xl font-bold tracking-tight text-foreground sm:text-3xl"
+            style={{ letterSpacing: "-0.02em" }}
+          >
+            ¿Cómo funciona?
+          </h2>
+          <div className="mt-12 grid gap-8 sm:grid-cols-3 sm:gap-6 lg:gap-12">
+            {steps.map((step, i) => (
+              <div key={step.number} className="flex flex-col items-center text-center">
+                <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-primary/10 text-primary">
+                  {i === 0 ? (
+                    <ClipboardList className="h-7 w-7" />
+                  ) : i === 1 ? (
+                    <DollarSign className="h-7 w-7" />
+                  ) : (
+                    <UserCheck className="h-7 w-7" />
+                  )}
                 </div>
-                <h3 className="mt-4 text-lg font-semibold">{step.title}</h3>
-                <p className="mt-2 text-sm text-muted-foreground">
+                <span className="mt-2 text-xs font-semibold text-accent tabular-nums">
+                  Paso {step.number}
+                </span>
+                <h3 className="mt-2 text-lg font-semibold text-foreground">{step.title}</h3>
+                <p className="mt-1 text-sm leading-relaxed text-muted-foreground">
                   {step.description}
                 </p>
               </div>
             ))}
           </div>
           <div className="mt-10 text-center">
-            <Link href="/publicar" className={buttonVariants()}>
+            <Link
+              href="/publicar"
+              className={buttonVariants({ size: "lg", className: "font-semibold shadow-sm" })}
+            >
               Publicar tarea
             </Link>
           </div>
@@ -199,52 +225,66 @@ export default function HomePage() {
       </section>
 
       {/* Categorías */}
-      <section id="categorias" className="bg-muted/30 py-20">
-        <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-          <h2 className="text-center text-3xl font-bold">Categorías populares</h2>
-          <div className="mt-12 grid gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+      <section id="categorias" className="py-16 sm:py-24 lg:py-32">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <h2
+            className="text-center text-2xl font-bold tracking-tight text-foreground sm:text-3xl"
+            style={{ letterSpacing: "-0.02em" }}
+          >
+            Categorías populares
+          </h2>
+          <div className="mt-10 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
             {categories.map((cat) => (
-              <Link key={cat.slug} href={`/explorar?categoria=${cat.slug}`}>
-                <Card className="cursor-pointer transition-shadow hover:shadow-md">
-                  <CardContent className="flex items-center gap-3 p-4">
-                    <cat.icon className="h-5 w-5 text-primary" />
-                    <span className="text-sm font-medium">{cat.name}</span>
-                  </CardContent>
-                </Card>
+              <Link
+                key={cat.slug}
+                href={`/explorar?categoria=${cat.slug}`}
+                className="group flex flex-col items-center gap-3 rounded-xl border border-border bg-card p-6 shadow-sm transition-all hover:-translate-y-1 hover:shadow-md"
+              >
+                <cat.icon className="h-8 w-8 text-accent transition-colors group-hover:text-primary" />
+                <span className="text-sm font-medium text-foreground">{cat.name}</span>
               </Link>
             ))}
           </div>
         </div>
       </section>
 
-      {/* CTA Taskers */}
-      <section className="py-20">
-        <div className="mx-auto max-w-4xl px-4 text-center sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold">Sé tu propio jefe</h2>
-          <p className="mx-auto mt-4 max-w-xl text-muted-foreground">
-            Registrate como Tasker y empezá a ganar plata haciendo lo que sabés.
-          </p>
-          <ul className="mx-auto mt-8 max-w-md space-y-3 text-left text-sm">
-            <li className="flex items-start gap-2">
-              <Star className="mt-0.5 h-4 w-4 flex-shrink-0 text-primary" />
-              Elegí tus horarios y zonas de trabajo
-            </li>
-            <li className="flex items-start gap-2">
-              <DollarSign className="mt-0.5 h-4 w-4 flex-shrink-0 text-primary" />
-              Poné tus propios precios
-            </li>
-            <li className="flex items-start gap-2">
-              <ClipboardList className="mt-0.5 h-4 w-4 flex-shrink-0 text-primary" />
-              Construí tu reputación con reseñas reales
-            </li>
-          </ul>
-          <div className="mt-8">
-            <Link
-              href="/registro?role=tasker"
-              className={buttonVariants({ size: "lg" })}
+      {/* CTA Taskers — fondo azul oscuro */}
+      <section className="bg-primary py-16 sm:py-24 lg:py-32">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="mx-auto max-w-2xl text-center">
+            <h2
+              className="text-2xl font-bold tracking-tight text-primary-foreground sm:text-3xl"
+              style={{ letterSpacing: "-0.02em" }}
             >
-              Registrate como Tasker <ArrowRight className="ml-2 h-4 w-4" />
-            </Link>
+              Sé tu propio jefe
+            </h2>
+            <p className="mt-3 text-base leading-relaxed text-primary-foreground/80">
+              Unite a miles de Taskers que ya ganan plata haciendo lo que saben.
+            </p>
+
+            <div className="mt-8 flex flex-col items-center gap-4 sm:flex-row sm:justify-center sm:gap-8">
+              <div className="flex items-center gap-2 text-primary-foreground/90">
+                <Star className="h-5 w-5" />
+                <span className="text-sm font-medium">Elegí tus horarios</span>
+              </div>
+              <div className="flex items-center gap-2 text-primary-foreground/90">
+                <DollarSign className="h-5 w-5" />
+                <span className="text-sm font-medium">Poné tu precio</span>
+              </div>
+              <div className="flex items-center gap-2 text-primary-foreground/90">
+                <ClipboardList className="h-5 w-5" />
+                <span className="text-sm font-medium">Trabajá en lo que te gusta</span>
+              </div>
+            </div>
+
+            <div className="mt-8">
+              <Link
+                href="/registro?role=tasker"
+                className={buttonVariants({ variant: "secondary", size: "lg", className: "font-semibold shadow-sm" })}
+              >
+                Empezar a ganar
+              </Link>
+            </div>
           </div>
         </div>
       </section>
