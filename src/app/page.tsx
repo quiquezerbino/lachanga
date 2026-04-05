@@ -1,6 +1,14 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { buttonVariants } from "@/components/ui/button-variants";
 import { JsonLd } from "@/components/json-ld";
+
+export const metadata: Metadata = {
+  title: "La Changa - Resolvé lo que necesites | Marketplace de servicios en Uruguay",
+  description:
+    "Publicá tu tarea, elegí al mejor profesional y listo. Limpieza, mudanzas, electricidad, plomería y más. La plataforma más fácil para conseguir ayuda en Uruguay.",
+  alternates: { canonical: "https://lachanga.uy" },
+};
 import {
   ArrowRight,
   ShieldCheck,
