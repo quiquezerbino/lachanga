@@ -30,15 +30,16 @@ export function Header() {
     <header className="sticky top-0 z-50 border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
         {/* Logo */}
-        <Link href="/" className="flex items-center">
+        <Link href="/" className="flex items-center gap-2">
           <Image
-            src="/logo-lachanga.png"
+            src="/icon-lachanga.png"
             alt="La Changa"
-            width={180}
-            height={100}
-            className="h-10 w-auto"
+            width={40}
+            height={40}
+            className="h-8 w-auto md:h-10"
             priority
           />
+          <span className="text-lg font-bold text-foreground md:text-xl">La Changa</span>
         </Link>
 
         {/* Desktop nav */}

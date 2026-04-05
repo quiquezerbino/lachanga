@@ -33,14 +33,15 @@ export function Footer() {
         <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
           {/* Brand */}
           <div>
-            <Link href="/" className="flex items-center">
+            <Link href="/" className="flex items-center gap-2">
               <Image
-                src="/logo-lachanga.png"
+                src="/icon-lachanga.png"
                 alt="La Changa"
-                width={150}
-                height={84}
-                className="h-8 w-auto"
+                width={32}
+                height={32}
+                className="h-7 w-auto"
               />
+              <span className="text-lg font-bold">La Changa</span>
             </Link>
             <p className="mt-3 text-sm text-muted-foreground">
               La forma más fácil de conseguir ayuda en Uruguay.
