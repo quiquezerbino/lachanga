@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { formatDistanceToNow, format } from "date-fns";
 import { es } from "date-fns/locale";
-import { ArrowLeft, MapPin, Clock, Star, Send } from "lucide-react";
+import { ArrowLeft, MapPin, Clock, Star, Send, ShieldAlert } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
@@ -248,8 +248,21 @@ export default function DetalleTareaPage({ params }: { params: Promise<{ id: str
         )}
       </div>
 
-      {/* Offer form */}
-      {user && isTasker && !isOwner && task.status === "open" && !alreadyOffered && (
+      {/* Offer form — verification required */}
+      {user && isTasker && !isOwner && task.status === "open" && !alreadyOffered && myProfile?.verification_status !== "verified" && (
+        <Link
+          href="/verificar"
+          className="mt-6 flex items-center gap-3 rounded-xl border border-amber-200 bg-amber-50 p-5 transition-shadow hover:shadow-md dark:border-amber-900 dark:bg-amber-950/30"
+        >
+          <ShieldAlert className="h-6 w-6 shrink-0 text-amber-500" />
+          <div>
+            <p className="text-sm font-semibold text-amber-800 dark:text-amber-200">Verificá tu identidad para ofertar</p>
+            <p className="text-xs text-amber-600 dark:text-amber-400">Necesitás verificar tu cédula antes de hacer ofertas</p>
+          </div>
+        </Link>
+      )}
+
+      {user && isTasker && !isOwner && task.status === "open" && !alreadyOffered && myProfile?.verification_status === "verified" && (
         <div className="mt-6 rounded-xl border bg-card p-5">
           <h3 className="text-sm font-semibold">Hacer una oferta</h3>
           <div className="mt-4 space-y-4">

@@ -19,6 +19,9 @@ import { cn } from "@/lib/utils";
 import { useAuth } from "@/contexts/auth-context";
 import { createClient } from "@/lib/supabase/client";
 import { DEPARTAMENTOS, CATEGORIES } from "@/lib/constants";
+import { ShieldAlert } from "lucide-react";
+import { buttonVariants } from "@/components/ui/button-variants";
+import Link from "next/link";
 
 type TaskType = "presencial" | "remota";
 type Currency = "UYU" | "USD";
@@ -57,7 +60,7 @@ export default function PublicarTareaPage() {
   const [form, setForm] = useState<FormData>(initialForm);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const { user } = useAuth();
+  const { user, profile, loading: authLoading } = useAuth();
   const router = useRouter();
   const supabase = createClient();
 
@@ -103,6 +106,22 @@ export default function PublicarTareaPage() {
   };
 
   const currencySymbol = form.currency === "UYU" ? "$" : "US$";
+
+  // Gate: must be verified to publish
+  if (!authLoading && user && profile?.verification_status !== "verified") {
+    return (
+      <div className="mx-auto flex max-w-lg flex-col items-center px-4 py-16 text-center">
+        <ShieldAlert className="h-16 w-16 text-amber-500" />
+        <h1 className="mt-6 text-2xl font-bold">Verificá tu identidad</h1>
+        <p className="mt-2 text-muted-foreground">
+          Para publicar tareas necesitás verificar tu identidad primero.
+        </p>
+        <Link href="/verificar" className={buttonVariants({ className: "mt-8 font-semibold" })}>
+          Verificar identidad
+        </Link>
+      </div>
+    );
+  }
 
   return (
     <div className="mx-auto max-w-2xl px-4 py-10 sm:py-16">
