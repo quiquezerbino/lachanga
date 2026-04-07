@@ -21,6 +21,8 @@ import {
   Clock,
   Inbox,
   DollarSign,
+  ShieldAlert,
+  ShieldX,
 } from "lucide-react";
 
 type Task = Tables<"tasks">;
@@ -107,6 +109,33 @@ export default function DashboardPage() {
           <Plus className="h-4 w-4" /> Publicar tarea
         </Link>
       </div>
+
+      {/* Verification banner */}
+      {(profile?.verification_status === "unverified" ||
+        profile?.verification_status === undefined) && (
+        <Link
+          href="/verificar"
+          className="mt-6 flex items-center gap-3 rounded-xl border border-amber-200 bg-amber-50 p-4 transition-shadow hover:shadow-md dark:border-amber-900 dark:bg-amber-950/30"
+        >
+          <ShieldAlert className="h-6 w-6 shrink-0 text-amber-500" />
+          <div className="min-w-0 flex-1">
+            <p className="text-sm font-semibold text-amber-800 dark:text-amber-200">Verificá tu identidad</p>
+            <p className="text-xs text-amber-600 dark:text-amber-400">Generá confianza verificando tu cédula de identidad</p>
+          </div>
+        </Link>
+      )}
+      {profile?.verification_status === "rejected" && (
+        <Link
+          href="/verificar"
+          className="mt-6 flex items-center gap-3 rounded-xl border border-destructive/20 bg-destructive/5 p-4 transition-shadow hover:shadow-md"
+        >
+          <ShieldX className="h-6 w-6 shrink-0 text-destructive" />
+          <div className="min-w-0 flex-1">
+            <p className="text-sm font-semibold text-destructive">Verificación rechazada</p>
+            <p className="text-xs text-destructive/70">Intentá nuevamente con fotos más claras</p>
+          </div>
+        </Link>
+      )}
 
       {/* Quick actions */}
       <div className="mt-8 grid gap-4 sm:grid-cols-3">

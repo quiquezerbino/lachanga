@@ -270,6 +270,7 @@ export type Database = {
           tasks_completed: number | null
           updated_at: string
           user_id: string
+          verification_status: Database["public"]["Enums"]["verification_status"]
         }
         Insert: {
           avatar_url?: string | null
@@ -288,6 +289,7 @@ export type Database = {
           tasks_completed?: number | null
           updated_at?: string
           user_id: string
+          verification_status?: Database["public"]["Enums"]["verification_status"]
         }
         Update: {
           avatar_url?: string | null
@@ -306,6 +308,7 @@ export type Database = {
           tasks_completed?: number | null
           updated_at?: string
           user_id?: string
+          verification_status?: Database["public"]["Enums"]["verification_status"]
         }
         Relationships: []
       }
@@ -445,6 +448,51 @@ export type Database = {
         }
         Relationships: []
       }
+      verifications: {
+        Row: {
+          id: string
+          user_id: string
+          cedula_url: string
+          selfie_url: string
+          ai_result: string
+          ai_confidence: number | null
+          ai_reasoning: string | null
+          admin_decision: string | null
+          admin_id: string | null
+          admin_notes: string | null
+          created_at: string
+          reviewed_at: string | null
+        }
+        Insert: {
+          id?: string
+          user_id: string
+          cedula_url: string
+          selfie_url: string
+          ai_result: string
+          ai_confidence?: number | null
+          ai_reasoning?: string | null
+          admin_decision?: string | null
+          admin_id?: string | null
+          admin_notes?: string | null
+          created_at?: string
+          reviewed_at?: string | null
+        }
+        Update: {
+          id?: string
+          user_id?: string
+          cedula_url?: string
+          selfie_url?: string
+          ai_result?: string
+          ai_confidence?: number | null
+          ai_reasoning?: string | null
+          admin_decision?: string | null
+          admin_id?: string | null
+          admin_notes?: string | null
+          created_at?: string
+          reviewed_at?: string | null
+        }
+        Relationships: []
+      }
       user_roles: {
         Row: {
           id: string
@@ -499,6 +547,7 @@ export type Database = {
       task_type: "presencial" | "remota"
       task_urgency: "normal" | "urgente"
       user_role: "client" | "tasker"
+      verification_status: "unverified" | "pending" | "verified" | "rejected"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -646,6 +695,7 @@ export const Constants = {
       task_type: ["presencial", "remota"],
       task_urgency: ["normal", "urgente"],
       user_role: ["client", "tasker"],
+      verification_status: ["unverified", "pending", "verified", "rejected"],
     },
   },
 } as const

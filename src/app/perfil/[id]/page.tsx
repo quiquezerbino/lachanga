@@ -76,7 +76,7 @@ export default function PerfilPage({ params }: { params: Promise<{ id: string }>
     );
   }
 
-  const isVerified = (profile.tasks_completed ?? 0) >= 10 && Number(profile.rating ?? 0) >= 4;
+  const isVerified = profile.verification_status === "verified";
   const computedAvg = reviews.length > 0
     ? reviews.reduce((sum, r) => sum + r.rating, 0) / reviews.length
     : Number(profile.rating ?? 0);
