@@ -61,6 +61,8 @@ CREATE TABLE IF NOT EXISTS public.verifications (
   ai_result TEXT NOT NULL CHECK (ai_result IN ('match', 'no_match', 'unclear')),
   ai_confidence NUMERIC(3,2),
   ai_reasoning TEXT,
+  document_number TEXT,
+  document_name TEXT,
   admin_decision TEXT CHECK (admin_decision IN ('approved', 'rejected')),
   admin_id UUID REFERENCES auth.users(id),
   admin_notes TEXT,

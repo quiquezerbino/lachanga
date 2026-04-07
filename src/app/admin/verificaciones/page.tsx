@@ -67,7 +67,7 @@ export default async function VerificacionesPage() {
                     </p>
                     <p className="text-xs text-muted-foreground">
                       {format(new Date(v.created_at), "d MMM yyyy, HH:mm", { locale: es })}
-                      {v.ai_reasoning && ` — ${v.ai_reasoning.substring(0, 80)}...`}
+                      {v.document_number && ` — CI: ${v.document_number}`}
                     </p>
                   </div>
                   <Badge variant={

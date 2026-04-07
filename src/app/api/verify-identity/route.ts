@@ -70,13 +70,17 @@ export async function POST(request: Request) {
 - Image 1: A photo of an identity document (cédula de identidad from Uruguay)
 - Image 2: A selfie of a person
 
-Your task: Determine if the person in the selfie is the same person shown on the identity document.
+Your tasks:
+1. Determine if the person in the selfie is the same person shown on the identity document.
+2. Extract the document number (número de cédula) and full name from the identity document.
 
 Respond ONLY with valid JSON (no markdown, no code fences):
 {
   "result": "match" | "no_match" | "unclear",
   "confidence": 0.0 to 1.0,
-  "reasoning": "brief explanation in Spanish"
+  "reasoning": "brief explanation in Spanish",
+  "document_number": "the cédula number (e.g. 1.234.567-8) or null if unreadable",
+  "document_name": "the full name on the document or null if unreadable"
 }
 
 Rules:
@@ -84,8 +88,8 @@ Rules:
 - "no_match": You are confident it's NOT the same person (confidence >= 0.75)
 - "unclear": Image quality is poor, document is partially obscured, or you cannot determine with confidence
 - Be conservative: when in doubt, return "unclear"
-- Do NOT try to read or extract personal data from the document (name, ID number, etc.)
-- Only compare the facial features`,
+- Extract the document number and name exactly as printed on the cédula
+- If you cannot read the document number or name clearly, set them to null`,
             },
           ],
         },
@@ -94,12 +98,18 @@ Rules:
 
     // 6. Parse AI response
     const aiText = aiResponse.content[0].type === "text" ? aiResponse.content[0].text : "";
-    let aiResult: { result: string; confidence: number; reasoning: string };
+    let aiResult: {
+      result: string;
+      confidence: number;
+      reasoning: string;
+      document_number: string | null;
+      document_name: string | null;
+    };
 
     try {
       aiResult = JSON.parse(aiText);
     } catch {
-      aiResult = { result: "unclear", confidence: 0, reasoning: "Error parsing AI response" };
+      aiResult = { result: "unclear", confidence: 0, reasoning: "Error parsing AI response", document_number: null, document_name: null };
     }
 
     // Validate result
@@ -117,6 +127,8 @@ Rules:
         ai_result: aiResult.result,
         ai_confidence: aiResult.confidence,
         ai_reasoning: aiResult.reasoning,
+        document_number: aiResult.document_number || null,
+        document_name: aiResult.document_name || null,
       });
 
     if (insertError) {

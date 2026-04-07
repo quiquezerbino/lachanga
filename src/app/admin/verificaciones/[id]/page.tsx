@@ -20,6 +20,8 @@ interface Verification {
   ai_result: string;
   ai_confidence: number | null;
   ai_reasoning: string | null;
+  document_number: string | null;
+  document_name: string | null;
   admin_decision: string | null;
   admin_notes: string | null;
   created_at: string;
@@ -175,6 +177,29 @@ export default function VerificacionDetallePage({ params }: { params: Promise<{ 
             </CardContent>
           </Card>
         </div>
+
+        {/* Document data */}
+        {(verification.document_number || verification.document_name) && (
+          <Card>
+            <CardContent className="p-4">
+              <p className="text-xs font-medium text-muted-foreground">Datos extraídos de la cédula</p>
+              <div className="mt-2 grid gap-2 sm:grid-cols-2">
+                {verification.document_name && (
+                  <div>
+                    <p className="text-xs text-muted-foreground">Nombre</p>
+                    <p className="text-sm font-medium">{verification.document_name}</p>
+                  </div>
+                )}
+                {verification.document_number && (
+                  <div>
+                    <p className="text-xs text-muted-foreground">Número de CI</p>
+                    <p className="text-sm font-mono font-medium">{verification.document_number}</p>
+                  </div>
+                )}
+              </div>
+            </CardContent>
+          </Card>
+        )}
 
         {/* AI reasoning */}
         {verification.ai_reasoning && (

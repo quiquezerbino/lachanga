@@ -457,6 +457,8 @@ export type Database = {
           ai_result: string
           ai_confidence: number | null
           ai_reasoning: string | null
+          document_number: string | null
+          document_name: string | null
           admin_decision: string | null
           admin_id: string | null
           admin_notes: string | null
@@ -471,6 +473,8 @@ export type Database = {
           ai_result: string
           ai_confidence?: number | null
           ai_reasoning?: string | null
+          document_number?: string | null
+          document_name?: string | null
           admin_decision?: string | null
           admin_id?: string | null
           admin_notes?: string | null
@@ -485,6 +489,8 @@ export type Database = {
           ai_result?: string
           ai_confidence?: number | null
           ai_reasoning?: string | null
+          document_number?: string | null
+          document_name?: string | null
           admin_decision?: string | null
           admin_id?: string | null
           admin_notes?: string | null
