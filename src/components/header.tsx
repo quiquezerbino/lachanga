@@ -96,11 +96,9 @@ export function Header() {
 
         {/* Mobile nav */}
         <Sheet open={open} onOpenChange={setOpen}>
-          <SheetTrigger className="md:hidden">
-            <Button variant="ghost" size="icon">
-              <Menu className="h-5 w-5" />
-              <span className="sr-only">Menú</span>
-            </Button>
+          <SheetTrigger className="md:hidden inline-flex items-center justify-center rounded-md h-9 w-9 hover:bg-accent hover:text-accent-foreground cursor-pointer">
+            <Menu className="h-5 w-5" />
+            <span className="sr-only">Menú</span>
           </SheetTrigger>
           <SheetContent side="right" className="w-72">
             <nav className="mt-8 flex flex-col gap-4">

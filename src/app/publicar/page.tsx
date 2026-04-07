@@ -107,7 +107,12 @@ export default function PublicarTareaPage() {
 
   const currencySymbol = form.currency === "UYU" ? "$" : "US$";
 
-  // Gate: must be verified to publish
+  // Gate: must be logged in and verified to publish
+  if (!authLoading && !user) {
+    router.push("/login");
+    return null;
+  }
+
   if (!authLoading && user && profile?.verification_status !== "verified") {
     return (
       <div className="mx-auto flex max-w-lg flex-col items-center px-4 py-16 text-center">
