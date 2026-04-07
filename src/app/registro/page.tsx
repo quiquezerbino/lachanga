@@ -1,8 +1,8 @@
 "use client";
 
-import { Suspense, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import Link from "next/link";
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -17,6 +17,7 @@ import {
 import { DEPARTAMENTOS } from "@/lib/constants";
 import { MailCheck } from "lucide-react";
 import { buttonVariants } from "@/components/ui/button-variants";
+import { Turnstile } from "@/components/turnstile";
 
 export default function RegistroPage() {
   return (
@@ -28,6 +29,7 @@ export default function RegistroPage() {
 
 function RegistroForm() {
   const searchParams = useSearchParams();
+  const router = useRouter();
   const initialRole = searchParams.get("role") === "tasker" ? "tasker" : "client";
 
   const [nombre, setNombre] = useState("");
@@ -38,8 +40,15 @@ function RegistroForm() {
   const [loading, setLoading] = useState(false);
   const [emailSent, setEmailSent] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [captchaToken, setCaptchaToken] = useState<string | null>(null);
 
   const supabase = createClient();
+
+  useEffect(() => {
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      if (session) router.replace("/dashboard");
+    });
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -56,6 +65,7 @@ function RegistroForm() {
       options: {
         data: { full_name: nombre, role, department: departamento },
         emailRedirectTo: window.location.origin,
+        captchaToken: captchaToken ?? undefined,
       },
     });
 
@@ -171,6 +181,11 @@ function RegistroForm() {
             </SelectContent>
           </Select>
         </div>
+
+        <Turnstile
+          onSuccess={setCaptchaToken}
+          onExpire={() => setCaptchaToken(null)}
+        />
 
         {error && <p className="text-sm text-destructive">{error}</p>}
 
