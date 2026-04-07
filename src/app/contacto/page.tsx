@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
 import { Mail, MessageSquare } from "lucide-react";
+import { ContactForm } from "@/components/contact-form";
 
 export const metadata: Metadata = {
   title: "Contacto",
@@ -21,33 +19,7 @@ export default function ContactoPage() {
         </p>
 
         <div className="mt-12 grid gap-12 lg:grid-cols-2">
-          {/* Form */}
-          <form className="space-y-6">
-            <div>
-              <label htmlFor="name" className="text-sm font-medium">
-                Nombre
-              </label>
-              <Input id="name" placeholder="Tu nombre" className="mt-1" />
-            </div>
-            <div>
-              <label htmlFor="email" className="text-sm font-medium">
-                Email
-              </label>
-              <Input id="email" type="email" placeholder="tu@email.com" className="mt-1" />
-            </div>
-            <div>
-              <label htmlFor="message" className="text-sm font-medium">
-                Mensaje
-              </label>
-              <Textarea
-                id="message"
-                placeholder="¿En qué te podemos ayudar?"
-                rows={5}
-                className="mt-1"
-              />
-            </div>
-            <Button type="submit">Enviar mensaje</Button>
-          </form>
+          <ContactForm />
 
           {/* Info */}
           <div className="space-y-8">

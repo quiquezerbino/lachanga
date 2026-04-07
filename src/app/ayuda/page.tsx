@@ -19,7 +19,11 @@ const faqs = [
   },
   {
     q: "¿Cómo me registro como Tasker?",
-    a: "Hacé click en 'Ganá plata haciendo changas', completá tu perfil con tus habilidades y zona de trabajo. Una vez aprobado, podés empezar a postularte a tareas.",
+    a: "Hacé click en 'Ganá plata haciendo changas', completá tu perfil con tus habilidades y zona de trabajo. Después verificá tu identidad con una foto de tu cédula y una selfie. Una vez verificado, podés empezar a postularte a tareas.",
+  },
+  {
+    q: "¿Cómo funciona la verificación de identidad?",
+    a: "Todos los usuarios deben verificar su identidad antes de publicar tareas o hacer ofertas. Subís una foto de tu cédula de identidad y una selfie. Nuestro sistema compara ambas imágenes automáticamente. Es rápido, seguro y tus datos se almacenan de forma privada.",
   },
   {
     q: "¿Cómo funciona el pago?",

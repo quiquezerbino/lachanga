@@ -40,14 +40,20 @@ const taskerSteps = [
       "Registrate gratis, completá tu perfil con tus habilidades y zona de trabajo.",
   },
   {
+    icon: ShieldCheck,
+    title: "2. Verificá tu identidad",
+    description:
+      "Subí una foto de tu cédula y una selfie. Nuestro sistema verifica tu identidad en segundos para que todos operen con confianza.",
+  },
+  {
     icon: ClipboardList,
-    title: "2. Postulate a tareas",
+    title: "3. Postulate a tareas",
     description:
       "Explorá las tareas disponibles en tu zona y enviá tus ofertas con tu precio.",
   },
   {
     icon: DollarSign,
-    title: "3. Hacé el trabajo y cobrá",
+    title: "4. Hacé el trabajo y cobrá",
     description:
       "Completá la tarea, recibí tu valoración y cobrá directo a tu cuenta de MercadoPago.",
   },
@@ -101,7 +107,7 @@ export default function ComoFunciona() {
           {/* Para taskers */}
           <div className="mt-20">
             <h2 className="text-2xl font-bold">Para Taskers</h2>
-            <div className="mt-8 grid gap-8 sm:grid-cols-3">
+            <div className="mt-8 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
               {taskerSteps.map((step) => (
                 <div key={step.title} className="rounded-xl border bg-card p-6">
                   <step.icon className="h-8 w-8 text-primary" />
