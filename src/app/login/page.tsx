@@ -79,6 +79,15 @@ export default function LoginPage() {
           />
         </div>
 
+        <div className="flex justify-end">
+          <Link
+            href="/recuperar"
+            className="text-xs text-muted-foreground hover:text-primary hover:underline"
+          >
+            ¿Olvidaste tu contraseña?
+          </Link>
+        </div>
+
         <Turnstile
           onSuccess={setCaptchaToken}
           onExpire={() => setCaptchaToken(null)}
