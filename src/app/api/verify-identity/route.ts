@@ -132,8 +132,11 @@ Rules:
     };
 
     try {
-      aiResult = JSON.parse(aiText);
+      // Strip markdown code fences if present (```json ... ```)
+      const cleanedText = aiText.replace(/```(?:json)?\s*/gi, "").replace(/```\s*/g, "").trim();
+      aiResult = JSON.parse(cleanedText);
     } catch {
+      console.error("Failed to parse AI response:", aiText);
       aiResult = { result: "unclear", confidence: 0, reasoning: "Error parsing AI response", document_number: null, document_name: null };
     }
 
