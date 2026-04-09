@@ -46,7 +46,7 @@ export const metadata: Metadata = {
     canonical: "https://lachanga.uy",
   },
   verification: {
-    google: "NNqymnIE9bBoK03BcIIAT5M-E0I67-Qca8v5s1f_j-0",
+    google: "Nm7mr2O3q_A7WddPT7zy5VpBCxjNA4FRGiH8u7JBEhQ",
   },
 };
 
