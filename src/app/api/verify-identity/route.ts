@@ -178,8 +178,9 @@ Rules:
       status: statusMap[aiResult.result],
       reasoning: aiResult.reasoning,
     });
-  } catch (err) {
-    console.error("Verification error:", err);
-    return NextResponse.json({ error: "Error interno" }, { status: 500 });
+  } catch (err: unknown) {
+    const errorMessage = err instanceof Error ? err.message : String(err);
+    console.error("Verification error:", errorMessage, err);
+    return NextResponse.json({ error: `Error interno: ${errorMessage}` }, { status: 500 });
   }
 }
