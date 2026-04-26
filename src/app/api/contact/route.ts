@@ -73,8 +73,8 @@ export async function POST(request: Request) {
     const resend = new Resend(resendKey);
 
     await resend.emails.send({
-      from: "La Changa <hola@lachanga.uy>",
-      to: "hola@lachanga.uy",
+      from: "La Changa <onboarding@resend.dev>",
+      to: "lachanga.uy@gmail.com",
       replyTo: email,
       subject: `[La Changa] Contacto de ${name}`,
       html: `
