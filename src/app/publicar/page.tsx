@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { ArrowLeft, ArrowRight, Check, CalendarIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -107,11 +107,12 @@ export default function PublicarTareaPage() {
 
   const currencySymbol = form.currency === "UYU" ? "$" : "US$";
 
+  useEffect(() => {
+    if (!authLoading && !user) router.push("/login");
+  }, [authLoading, user, router]);
+
   // Gate: must be logged in and verified to publish
-  if (!authLoading && !user) {
-    router.push("/login");
-    return null;
-  }
+  if (!authLoading && !user) return null;
 
   if (!authLoading && user && profile?.verification_status !== "verified") {
     return (

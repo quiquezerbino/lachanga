@@ -43,6 +43,16 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "Faltan archivos" }, { status: 400 });
     }
 
+    // 2.5 Validar ownership de los paths (el usuario solo puede verificar sus propios archivos)
+    if (
+      typeof cedulaPath !== "string" ||
+      typeof selfiePath !== "string" ||
+      !cedulaPath.startsWith(`${user.id}/`) ||
+      !selfiePath.startsWith(`${user.id}/`)
+    ) {
+      return NextResponse.json({ error: "Path inválido" }, { status: 403 });
+    }
+
     // 3. Download images from private bucket using admin client
     const admin = createAdminClient();
 

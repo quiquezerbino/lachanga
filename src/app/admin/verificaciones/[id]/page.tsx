@@ -73,6 +73,7 @@ export default function VerificacionDetallePage({ params }: { params: Promise<{ 
   }, [id, supabase]);
 
   async function handleDecision(decision: "approved" | "rejected") {
+    if (submitting) return;
     if (!verification) return;
     setSubmitting(true);
 

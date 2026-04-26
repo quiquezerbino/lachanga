@@ -59,7 +59,10 @@ export default async function ExplorarPage({
     .range((page - 1) * ITEMS_PER_PAGE, page * ITEMS_PER_PAGE - 1);
 
   if (q) {
-    query = query.or(`title.ilike.%${q}%,description.ilike.%${q}%`);
+    const safeQ = q.replace(/[,()%]/g, " ").trim().slice(0, 100);
+    if (safeQ) {
+      query = query.or(`title.ilike.%${safeQ}%,description.ilike.%${safeQ}%`);
+    }
   }
   if (categoria) {
     query = query.eq("category", categoria);
